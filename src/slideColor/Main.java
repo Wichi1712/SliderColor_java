@@ -20,15 +20,17 @@ public class Main extends JFrame{
 	javax.swing.JSlider slid, slid1, slid2, slid3;
 	javax.swing.JColorChooser colChoose;
 	javax.swing.JLabel labelTxt = new JLabel();
+	javax.swing.JLabel labelTxt2 = new JLabel();
 	javax.swing.JLabel labelRed, labelGreen, labelBlue;
 	javax.swing.JTextField txtField;
 	javax.swing.JTextArea txtArea;
 	
 	
 	private static final int MIN = 0, MAX = 255;
+	private static final int ANCHO = 700, ALTO = 700;
 	
 	public Main() {
-		setSize(700, 700);
+		setSize(ANCHO, ALTO);
 		setTitle("Color Slider");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,17 +46,27 @@ public class Main extends JFrame{
 	public void iniciaComponentes() {
 		
 		panel = new JPanel();
-		panel.setBackground(Color.gray);
+		panel.setBackground(Color.darkGray);
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 		
 		
-		labelTxt.setText("Este es un selector de color de prueba");
-		labelTxt.setBounds(150, 10, 320, 50);
-		labelTxt.setFont(new Font("comic sans MS", Font.BOLD, 16));
+		//Texto para blanco y negro
+		labelTxt.setText("Selector de color blanco y negro");
+		labelTxt.setForeground(Color.YELLOW);
+		labelTxt.setBounds(10, 10, ANCHO, 50);
+		labelTxt.setFont(new Font("comic sans MS", Font.BOLD, 18));
 		panel.add(labelTxt);
 		
-		//Deslizador
+		//Texto para rojo, verde y azul
+		labelTxt2.setText("Selectores de color rojo, verde, azul");
+		labelTxt2.setForeground(Color.YELLOW);
+		labelTxt2.setBounds(10, 200, ANCHO, 50);
+		labelTxt2.setFont(new Font("comic sans MS", Font.BOLD, 18));
+		panel.add(labelTxt2);
+		
+		//------DESLIZADORES----------
+		//Deslizador para color negro y blanco
 		slid = new JSlider();
 		slid.setBounds(10, 50, 500, 45);
 		slid.setValue(0);//Valor inicial
@@ -70,8 +82,9 @@ public class Main extends JFrame{
 		slid.addChangeListener(new EventoSlid());//Escuchador de cambios
 		panel.add(slid);
 		
+		//Deslizadores para rojo, verde, azul
 		slid1 = new JSlider();
-		slid1.setBounds(10, 220, 500, 45);
+		slid1.setBounds(10, 240, 500, 45);
 		slid1.setValue(0);//Valor inicial
 		slid1.setMajorTickSpacing(15);//Necesario para que muestre paintLabels
 		slid1.setPaintLabels(true);
@@ -86,7 +99,7 @@ public class Main extends JFrame{
 		panel.add(slid1);
 		
 		slid2 = new JSlider();
-		slid2.setBounds(10, 270, 500, 45);
+		slid2.setBounds(10, 290, 500, 45);
 		slid2.setValue(0);//Valor inicial
 		slid2.setMajorTickSpacing(15);//Necesario para que muestre paintLabels
 		slid2.setPaintLabels(true);
@@ -101,7 +114,7 @@ public class Main extends JFrame{
 		panel.add(slid2);
 		
 		slid3 = new JSlider();
-		slid3.setBounds(10, 320, 500, 45);
+		slid3.setBounds(10, 340, 500, 45);
 		slid3.setValue(0);//Valor inicial
 		slid3.setMajorTickSpacing(15);//Necesario para que muestre paintLabels
 		slid3.setPaintLabels(true);
@@ -116,32 +129,35 @@ public class Main extends JFrame{
 		panel.add(slid3);
 		
 		
-		//Muestra de Color
-		txtArea = new JTextArea();
-		txtArea.setBounds(10, 100, 100, 100);
-		txtArea.setBackground(Color.PINK);
+		//----MUESTRA DE COLOR Y CODIGO DE CADA COLOR-----------
+		txtArea = new JTextArea();//Para blanco y negro
+		txtArea.setBounds(10, 100, 200, 100);
+		//txtArea.setBackground(Color.YELLOW);//Se inicializa en el main
 		panel.add(txtArea);
 		
-		txtField = new JTextField();
-		txtField.setBounds(10, 380, 100, 100);
-		txtField.setBackground(Color.cyan);
+		txtField = new JTextField();//Para R, G, B
+		txtField.setBounds(10, 400, 200, 100);
+		//txtField.setBackground(Color.orange);//Se inicializa en el main
 		panel.add(txtField);
 		
 		labelRed = new JLabel();
 		labelRed.setText("R = 0");
-		labelRed.setBounds(550, 220, 320, 50);
+		labelRed.setForeground(Color.WHITE);
+		labelRed.setBounds(550, 240, 320, 50);
 		labelRed.setFont(new Font("comic sans MS", Font.BOLD, 16));
 		panel.add(labelRed);
 		
 		labelGreen = new JLabel();
 		labelGreen.setText("G = 0");
-		labelGreen.setBounds(550, 270, 320, 50);
+		labelGreen.setForeground(Color.WHITE);
+		labelGreen.setBounds(550, 290, 320, 50);
 		labelGreen.setFont(new Font("comic sans MS", Font.BOLD, 16));
 		panel.add(labelGreen);
 		
 		labelBlue = new JLabel();
 		labelBlue.setText("B = 0");
-		labelBlue.setBounds(550, 320, 320, 50);
+		labelBlue.setForeground(Color.WHITE);
+		labelBlue.setBounds(550, 340, 320, 50);
 		labelBlue.setFont(new Font("comic sans MS", Font.BOLD, 16));
 		panel.add(labelBlue);
 		
@@ -158,6 +174,8 @@ public class Main extends JFrame{
 		
 		txtArea.setBackground(new Color(BL,BL,BL));
 		txtField.setBackground(new Color(R, G, B));
+		txtField.setText("RGB = "+ R + ","+ G + ","+ B);
+		//txtField.setText("RGB = "+R+G+B);
 		labelRed.setText("R = "+ R);
 		labelGreen.setText("G = "+ G);
 		labelBlue.setText("B = "+ B);
